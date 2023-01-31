@@ -25,11 +25,18 @@ namespace RDMQA
         }
         public void MoveToLocation(IWebElement element)
         {
-            Thread.Sleep(2000);
+            //Thread.Sleep(2000);
             int deltaY = element.Location.Y;
             new Actions(_seleniumDriver).ScrollByAmount(0, deltaY).Perform();
-            Thread.Sleep(2000);
+            //Thread.Sleep(2000);
         }
+
+        //public void MoveToLocation(By element)
+        //{
+        //    wait.Until(ExpectedConditions.ElementExists(element));
+        //    int deltaY = _seleniumDriver.FindElement(element).Location.Y;
+        //    new Actions(_seleniumDriver).ScrollByAmount(0, deltaY).Perform();
+        //}
 
         public string GetNewDataProductNumber()
         {

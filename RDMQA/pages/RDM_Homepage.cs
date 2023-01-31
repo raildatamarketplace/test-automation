@@ -1,6 +1,8 @@
 ﻿using AutoIt;
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +15,25 @@ namespace RDMQA
     public class RDM_Homepage
     {
         private IWebDriver _seleniumDriver;
+        private WebDriverWait wait;
         //Sets homepage URL
         private string _homepageURL = AppConfigReader.HomepageURL;
 
         //Finding web elements
-        private IWebElement _loginLink => _seleniumDriver.FindElement(By.LinkText("Login"));
-        private IWebElement _manageDropdownLink => _seleniumDriver.FindElement(By.CssSelector("div[title='Manage']"));
-        private IWebElement _myProductsLink => _seleniumDriver.FindElement(By.LinkText("My products"));
-        private IWebElement _productAprovalsLink => _seleniumDriver.FindElement(By.LinkText("Product approvals"));
-        private IWebElement _accessButton => _seleniumDriver.FindElement(By.CssSelector("button[class='ui button customBtn1Primary']"));
-        private IWebElement _cookieBannerButton => _seleniumDriver.FindElement(By.CssSelector("button[class='ui small button customBtn1Primary']"));
-        private IWebElement _cookieBannerButton2 => _seleniumDriver.FindElement(By.CssSelector("button[class='ui small fluid button customBtn1Primary']"));
-        private IWebElement _accountDropdown => _seleniumDriver.FindElement(By.CssSelector("div[class='ui item dropdown'"));
-        private IWebElement _signoutButton => _seleniumDriver.FindElement(By.XPath("//div[.='Sign out']"));
+        private IWebElement _loginLink => wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Login")));
+        private IWebElement _manageDropdownLink => wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[title='Manage']")));
+        private IWebElement _myProductsLink => wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("My products")));
+        private IWebElement _productAprovalsLink => wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Product approvals")));
+        private IWebElement _accessButton => wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("button[class='ui button customBtn1Primary']")));
+        private IWebElement _cookieBannerButton => wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("button[class='ui small button customBtn1Primary']")));
+        private IWebElement _cookieBannerButton2 => wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("button[class='ui small fluid button customBtn1Primary']")));
+        private IWebElement _accountDropdown => wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[class='ui item dropdown'")));
+        private IWebElement _signoutButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[.='Sign out']")));
         //Constructor
         public RDM_Homepage(IWebDriver seleniumDriver)
         {
             this._seleniumDriver = seleniumDriver;
+            this.wait = new WebDriverWait(seleniumDriver, TimeSpan.FromSeconds(10));
         }
 
         //Functions

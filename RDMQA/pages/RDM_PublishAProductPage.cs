@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,54 +21,53 @@ namespace RDMQA
         private string _publishAProductURL = AppConfigReader.DataProductURL;
 
         //Finding web elements
-        private IWebElement _enterProductDetaisLink => _seleniumDriver.FindElement(By.XPath("//button[.='Enter product details']"));
-        private IWebElement _productName => _seleniumDriver.FindElement(By.Name("name"));
-        private IWebElement _productDescription => _seleniumDriver.FindElement(By.Name("description"));
-        private IWebElement _nextButton => _seleniumDriver.FindElement(By.XPath("//button[.='Next Step']"));
-        private IWebElement _datasourceSearchBar => _seleniumDriver.FindElement(By.XPath("//input[@placeholder='Search data source']"));
-        private IReadOnlyList<IWebElement> _dataSourceRadioButtons => _seleniumDriver.FindElements(By.XPath("//div[@class='ui radio checkbox']"));
-        private IWebElement _tagsSearchBar => _seleniumDriver.FindElement(By.XPath("//input[@placeholder='Search tags']"));
-        private IWebElement _themesSearchBar => _seleniumDriver.FindElement(By.XPath("//input[@placeholder='Search themes']"));
-        private IReadOnlyList<IWebElement> _tagsMainButton => _seleniumDriver.FindElements(By.XPath("//i[@class='plus icon']"));
-        private IReadOnlyList<IWebElement> _subtagsRadioButtons => _seleniumDriver.FindElements(By.XPath("//div[@class='ui checkbox mr-5px']"));
-        private IWebElement _firstThemeRadioButton => _seleniumDriver.FindElement(By.CssSelector(".mb-1:nth-child(1).textMedium"));
-        private IReadOnlyList<IWebElement> _themesRadioButtons => _seleniumDriver.FindElements(By.XPath("//div[@class='ui checkbox my-5px mr-5px']"));
-        private IWebElement _dataProductCanDoTextBox => _seleniumDriver.FindElement(By.Name("dataProductCanDo"));
-        private IWebElement _dataProductCannotDoTextBox => _seleniumDriver.FindElement(By.Name("dataProductCannotDo"));
-        private IReadOnlyList<IWebElement> _publishButtons => _seleniumDriver.FindElements(By.XPath("//div[@class='ui radio checkbox']"));
+        private IWebElement _enterProductDetaisLink => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Enter product details']")));
+        private IWebElement _productName => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("name")));
+        private IWebElement _productDescription => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("description")));
+        private IWebElement _nextButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Next Step']")));
+        private IWebElement _datasourceSearchBar => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Search data source']")));
+        private IReadOnlyList<IWebElement> _dataSourceRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui radio checkbox']")));
+        private IWebElement _tagsSearchBar => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Search tags']")));
+        private IWebElement _themesSearchBar => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Search themes']")));
+        private IReadOnlyList<IWebElement> _tagsMainButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//i[@class='plus icon']")));
+        private IReadOnlyList<IWebElement> _subtagsRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui checkbox mr-5px']")));
+        private IReadOnlyList<IWebElement> _themesRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui checkbox my-5px mr-5px']")));
+        private IWebElement _dataProductCanDoTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("dataProductCanDo")));
+        private IWebElement _dataProductCannotDoTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("dataProductCannotDo")));
+        private IReadOnlyList<IWebElement> _publishButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui radio checkbox']")));
         private IWebElement _publishImmediatelyRadioButton => _publishButtons[0];
         private IWebElement _publishScheduleRadioButton => _publishButtons[1];
-        private IWebElement _retirementPolicyTextBox => _seleniumDriver.FindElement(By.Name("retirementPolicy"));
-        private IReadOnlyList<IWebElement> _serviceLevelAgreementRadioButtons => _seleniumDriver.FindElements(By.XPath("//div[@class='ui radio checkbox']"));
+        private IWebElement _retirementPolicyTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("retirementPolicy")));
+        private IReadOnlyList<IWebElement> _serviceLevelAgreementRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui radio checkbox']")));
         private IWebElement _SLAYesRadioButton => _serviceLevelAgreementRadioButtons[0];
         private IWebElement _SLANoRadioButton => _serviceLevelAgreementRadioButtons[1];
-        private IReadOnlyList<IWebElement> _SLAMetrics => _seleniumDriver.FindElements(By.XPath("//div[@class='ui checkbox py-5px']"));
+        private IReadOnlyList<IWebElement> _SLAMetrics => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui checkbox py-5px']")));
         private IWebElement _SLAServiceUptimeRadioButton => _SLAMetrics[0];
-        private IWebElement _SLAServiceUptimeTextBox => _seleniumDriver.FindElement(By.XPath("//input[@placeholder='Enter as a percentage']"));
+        private IWebElement _SLAServiceUptimeTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Enter as a percentage']")));
         private IWebElement _SLAResolutionTimeRadioButton => _SLAMetrics[9];
-        private IWebElement _SLAResolutionTimeTextBox => _seleniumDriver.FindElements(By.XPath("//input[@placeholder='Enter a duration in hours']"))[1];
+        private IWebElement _SLAResolutionTimeTextBox => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@placeholder='Enter a duration in hours']")))[1];
         private IWebElement _SLAResponseTimeOutsideRadioButton => _SLAMetrics[5];
-        private IWebElement _SLAResponseTimeOutsideTextBox => _seleniumDriver.FindElement(By.XPath("//input[@placeholder='Enter a duration in hours']"));
-        private IReadOnlyList<IWebElement> _whoCanUseTheDataRadioButtons => _seleniumDriver.FindElements(By.XPath("//div[@class ='ui radio checkbox']"));
+        private IWebElement _SLAResponseTimeOutsideTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Enter a duration in hours']")));
+        private IReadOnlyList<IWebElement> _whoCanUseTheDataRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class ='ui radio checkbox']")));
         private IWebElement _whoCanUseTheDataAnyoneRadioButton => _whoCanUseTheDataRadioButtons[0];
-        private IReadOnlyList<IWebElement> _whatCanTheDataBeUsedForRadioButtons => _seleniumDriver.FindElements(By.XPath("//div[@class ='ui radio checkbox']"));
+        private IReadOnlyList<IWebElement> _whatCanTheDataBeUsedForRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class ='ui radio checkbox']")));
         private IWebElement _whatCanTheDataBeUsedForAcademia => _whatCanTheDataBeUsedForRadioButtons[0];
-        private IReadOnlyList<IWebElement> _chargingModelRadioButtons => _seleniumDriver.FindElements(By.XPath("//div[@class ='ui radio checkbox']"));
+        private IReadOnlyList<IWebElement> _chargingModelRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class ='ui radio checkbox']")));
         private IWebElement _chargingModelFree => _chargingModelRadioButtons[0];
-        private IWebElement _noFairUsageLimitsRadioButton => _seleniumDriver.FindElements(By.XPath("//div[@class ='ui radio checkbox']"))[0];
-        private IWebElement _yesRecommendedLicenceRadioButton => _seleniumDriver.FindElements(By.XPath("//div[@class ='ui radio checkbox']"))[0];
-        private IReadOnlyList<IWebElement> _licencePageDropDowns => _seleniumDriver.FindElements(By.XPath("//div[@role ='listbox']"));
+        private IWebElement _noFairUsageLimitsRadioButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class ='ui radio checkbox']")))[0];
+        private IWebElement _yesRecommendedLicenceRadioButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class ='ui radio checkbox']")))[0];
+        private IReadOnlyList<IWebElement> _licencePageDropDowns => wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@role ='listbox']")));
         private IWebElement _licenceTermDropDown => _licencePageDropDowns[3];
         private IWebElement _licenceNoticePeriodDropDown => _licencePageDropDowns[4];
         private IWebElement _licenceTerritorialPermissionDropDown => _licencePageDropDowns[5];
-        private IWebElement _submitButton => _seleniumDriver.FindElement(By.XPath("//button[.='Submit']"));
+        private IWebElement _submitButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Submit']")));
        
         //Constructor
         public RDM_PublishAProductPage(IWebDriver seleniumDriver)
         {
             this._seleniumDriver = seleniumDriver;
             this.utils = new Utils(seleniumDriver);
-            this.wait = new WebDriverWait(seleniumDriver, TimeSpan.FromSeconds(5));
+            this.wait = new WebDriverWait(seleniumDriver, TimeSpan.FromSeconds(10));
         }
 
         public void ClickProductDetails() => _enterProductDetaisLink.Click();

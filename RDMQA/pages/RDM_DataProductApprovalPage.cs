@@ -2,6 +2,8 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,23 +17,25 @@ namespace RDMQA
     {
         private IWebDriver _seleniumDriver;
         private Utils utils;
+        private WebDriverWait wait;
         //Sets homepage URL
         private string _productApprovalURL = AppConfigReader.ProductApprovalURL;
 
         //Finding web elements
 
-        private IWebElement _reasonTextBox => _seleniumDriver.FindElement(By.Name("remark"));
-        private IWebElement _approvalButton => _seleniumDriver.FindElement(By.XPath("//button[.='Approve']"));
-        private IWebElement _rejectButton => _seleniumDriver.FindElement(By.XPath("//button[.='Reject']"));
-        private IWebElement _sendBackButton => _seleniumDriver.FindElement(By.XPath("//button[.='Send back']"));
-        private IWebElement _okConfirmationButton => _seleniumDriver.FindElement(By.XPath("//button[.='OK']"));
-        private IWebElement _subscribeButton => _seleniumDriver.FindElement(By.XPath("//button[.='Subscribe']"));
+        private IWebElement _reasonTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("remark"))); 
+        private IWebElement _approvalButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Approve']"))); 
+        private IWebElement _rejectButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Reject']"))); 
+        private IWebElement _sendBackButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Send back']")));
+        private IWebElement _okConfirmationButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='OK']")));
+        private IWebElement _subscribeButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Subscribe']")));
 
         //Constructor
         public RDM_DataProductApprovalPage(IWebDriver seleniumDriver)
         {
             this._seleniumDriver = seleniumDriver;
             this.utils = new Utils(seleniumDriver);
+            this.wait = new WebDriverWait(seleniumDriver, TimeSpan.FromSeconds(10));
         }
 
         //Functions
