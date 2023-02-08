@@ -14,7 +14,6 @@ namespace RDMQA
         public static readonly string LoginURL = ConfigurationManager.AppSettings["login_url"];
         public static readonly string DataProductURL = ConfigurationManager.AppSettings["dataproduct_url"];
         public static readonly string PublishAProductURL = ConfigurationManager.AppSettings["publishaproduct_url"];
-        public static readonly string DataProductNumber = ConfigurationManager.AppSettings["dataproduct_number"];
         public static readonly string ProductApprovalURL = ConfigurationManager.AppSettings["dataapproval_url"];
 
         public static void UpdateValue(string key, string value)

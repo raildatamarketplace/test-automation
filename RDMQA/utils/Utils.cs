@@ -10,6 +10,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.IO;
 using SeleniumExtras.WaitHelpers;
+using System.Drawing.Drawing2D;
 
 namespace RDMQA
 {
@@ -17,11 +18,15 @@ namespace RDMQA
     {
         private IWebDriver _seleniumDriver;
         private WebDriverWait wait;
+        private string fileName;
+        private string path;
 
         public Utils(IWebDriver _driver)
         {
             _seleniumDriver = _driver;
             this.wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            fileName = @"..\..\DataProductNumber.txt";
+            path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
         }
         public void MoveToLocation(IWebElement element)
         {
@@ -40,16 +45,27 @@ namespace RDMQA
 
         public string GetNewDataProductNumber()
         {
-            int current = Convert.ToInt32(AppConfigReader.DataProductNumber);
+            StreamReader sr = new StreamReader(path);
+            string line = sr.ReadLine();
+            sr.Close();
+            int current = Convert.ToInt32(line);
             int updated = current + 1;
-            AppConfigReader.UpdateValue("dataproduct_number", updated.ToString());
+
+
+            StreamWriter sw = new StreamWriter(path);
+            sw.WriteLine(updated);
+            sw.Close();
             return current.ToString();
         }
 
         public string GetDataProductNumber()
         {
-            int current = Convert.ToInt32(AppConfigReader.DataProductNumber) - 1;
+            StreamReader sr = new StreamReader(path);
+            string line = sr.ReadLine();
+            sr.Close();
+            int current = Convert.ToInt32(line) - 1;
             return current.ToString();
         }
+
     }
 }

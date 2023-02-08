@@ -13,3 +13,4 @@ Scenario: Publisher Full Publish Journey
 	Given I have logged in as a RDM Admin
 	When I have approved a data product
 	Then The data product is approved
+		
