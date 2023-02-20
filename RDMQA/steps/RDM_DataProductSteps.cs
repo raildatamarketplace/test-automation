@@ -1,6 +1,8 @@
-﻿using NUnit.Framework;
+﻿using log4net;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -228,8 +230,7 @@ namespace RDMQA.steps
         [Then(@"I should be taken to the submit confirmation page")]
         public void ThenIShouldBeTakenToTheSubmitConfirmationPage()
         {
-            Thread.Sleep(3000);
-            Assert.That(RDM_Website.SeleniumDriver.Url, Does.Contain("/submit"));
+            Assert.IsTrue(RDM_Website.SeleniumDriver.Url.Contains("/submit"));
         }
     }
 }

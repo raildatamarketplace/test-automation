@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using log4net;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -15,10 +16,14 @@ namespace RDMQA.steps
     public class RDM_DataProductApprovalSteps
     {
         private RDM_Website<ChromeDriver> RDM_Website;
+        private ILog log;
+        private ScenarioContext scenarioContext;
 
-        public RDM_DataProductApprovalSteps(RDM_Website<ChromeDriver> rdm_website)
+        public RDM_DataProductApprovalSteps(RDM_Website<ChromeDriver> rdm_website, ScenarioContext scenarioContext)
         {
             RDM_Website = rdm_website;
+            this.scenarioContext = scenarioContext;
+            log = Log4NetHelper.GetLogger($@"{scenarioContext.ScenarioInfo.Title} - {DateTime.UtcNow.ToString("HH-mm-ss")}", scenarioContext);
         }
 
         [When(@"I have navigated to the data product approval page")]
@@ -43,7 +48,15 @@ namespace RDMQA.steps
         [Then(@"The data product is approved")]
         public void ThenTheDataProductIsApproved()
         {
-            Assert.IsTrue(RDM_Website.RDM_DataProductApprovalPage.IsProductApproved());
+            if(RDM_Website.RDM_DataProductApprovalPage.IsProductApproved())
+            {
+                log.Info("Test Passed");
+                Assert.Pass();
+            } else
+            {
+                log.Error("Test Failed - Product was not approved");
+                Assert.Fail();
+            }
         }
     }
 }

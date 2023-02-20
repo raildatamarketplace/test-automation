@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.DevTools.V106.Debugger;
+using OpenQA.Selenium.DevTools;
 using RDMQA.steps;
 using System;
 using System.Collections.Generic;

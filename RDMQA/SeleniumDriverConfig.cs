@@ -28,6 +28,7 @@ namespace RDMQA
             Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(pageLoadInSecs);
             //Time the driver waits for the elements to load before the tests fail in seconds
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(implicitWaitInSecs);
+            Driver.Manage().Window.Maximize();
         }
     }
 }
