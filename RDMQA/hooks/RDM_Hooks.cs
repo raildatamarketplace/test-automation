@@ -24,34 +24,45 @@ namespace RDMQA.hooks
         private IObjectContainer _objectContainer;
         public RDM_Website<ChromeDriver> RDM_Website;
         private ScenarioContext scenarioContext;
+        private FeatureContext featureContext;
         private ILog log;
 
-        public RDM_Hooks(IObjectContainer objectContainer, ScenarioContext scenarioContext)
+        public RDM_Hooks(IObjectContainer objectContainer, ScenarioContext scenarioContext, FeatureContext featureContext)
         {
             _objectContainer = objectContainer;
             this.scenarioContext = scenarioContext;
-            log = Log4NetHelper.GetLogger($@"{scenarioContext.ScenarioInfo.Title} - {DateTime.UtcNow.ToString("HH-mm-ss")}", scenarioContext);
+            this.featureContext = featureContext;
         }
         
         [BeforeScenario]
         public void InitWebDriver()
-        {
+            {
             RDM_Website = new RDM_Website<ChromeDriver>();
             _objectContainer.RegisterInstanceAs<RDM_Website<ChromeDriver>>(RDM_Website);
+            string featureDir = $@"({featureContext.FeatureInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
+            string featureFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, featureDir);
+
+            // If directory does not exist, create it
+            if (!Directory.Exists(featureFolderPath))
+            {
+                Directory.CreateDirectory(featureFolderPath);
+            }
+            log = Log4NetHelper.GetLogger($@"{scenarioContext.ScenarioInfo.Title} - {DateTime.UtcNow.ToString("HH-mm-ss")}", scenarioContext, featureContext);
         }
         
         [AfterScenario]
         public void DisposeWebDriver()
         {
-            string dir = $@"({scenarioContext.ScenarioInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
+            string featureDir = $@"({featureContext.FeatureInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
+            string scenarioDir = $@"({scenarioContext.ScenarioInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
             string imageName = Log4NetHelper.GetFileName();
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dir);
-            string imagePath = Path.Combine(path, imageName);
+            string scenarioFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, featureDir, scenarioDir);
+            string imagePath = Path.Combine(scenarioFolderPath, imageName);
             
             // If directory does not exist, create it
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(scenarioFolderPath))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(scenarioFolderPath);
             }
 
             //Checking if Test has passed or failed for screenshot.
@@ -70,5 +81,11 @@ namespace RDMQA.hooks
             RDM_Website.SeleniumDriver.Quit();
             RDM_Website.SeleniumDriver.Dispose();
         }
+
+        //[BeforeFeature]
+        //public void CreateDirectory()
+        //{
+        //
+        //}
     }
 }

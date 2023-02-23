@@ -20,6 +20,7 @@ namespace RDMQA
         private static readonly string _layout = "%date{dd MMM yyyy HH:mm:ss} [%level] - %message%newline";
         private static readonly string _appenderName = "FileAppender";
         private static ScenarioContext scenarioContext;
+        private static FeatureContext featureContext;
         private static string fileName;
 
         private static PatternLayout GetPatternLayout()
@@ -36,14 +37,10 @@ namespace RDMQA
 
         private static FileAppender GetFileAppender()
         {
-            string dir = $@"({scenarioContext.ScenarioInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dir);
-            string filePath = Path.Combine(path, fileName);
-            // If directory does not exist, create it
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
+            string featureDir = $@"({featureContext.FeatureInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
+            string scenarioDir = $@"({scenarioContext.ScenarioInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
+            string scenarioFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, featureDir, scenarioDir);
+            string filePath = Path.Combine(scenarioFolderPath, fileName);
             var fileAppender = new FileAppender
             {
                 Name = _appenderName,
@@ -60,13 +57,14 @@ namespace RDMQA
             return fileAppender;
         }
 
-        public static ILog GetLogger(string _fileName, ScenarioContext _scenarioContext)
+        public static ILog GetLogger(string _fileName, ScenarioContext _scenarioContext, FeatureContext _featureContext)
         { 
             fileName = _fileName;
             // Remember to clear old logger
             Logger root = ((Hierarchy)LogManager.GetRepository()).Root;
             root.RemoveAppender(_appenderName);
             scenarioContext = _scenarioContext;
+            featureContext = _featureContext;
 
             BasicConfigurator.Configure(GetFileAppender());
 

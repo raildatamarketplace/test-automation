@@ -19,11 +19,11 @@ namespace RDMQA.steps
         private ILog log;
         private ScenarioContext scenarioContext;
 
-        public RDM_DataProductApprovalSteps(RDM_Website<ChromeDriver> rdm_website, ScenarioContext scenarioContext)
+        public RDM_DataProductApprovalSteps(RDM_Website<ChromeDriver> rdm_website, ScenarioContext scenarioContext, FeatureContext featureContext)
         {
             RDM_Website = rdm_website;
             this.scenarioContext = scenarioContext;
-            log = Log4NetHelper.GetLogger($@"{scenarioContext.ScenarioInfo.Title} - {DateTime.UtcNow.ToString("HH-mm-ss")}", scenarioContext);
+            log = Log4NetHelper.GetLogger($@"{scenarioContext.ScenarioInfo.Title} - {DateTime.UtcNow.ToString("HH-mm-ss")}", scenarioContext, featureContext);
         }
 
         [When(@"I have navigated to the data product approval page")]

@@ -151,7 +151,6 @@
     <Compile Include="pages\RDM_Homepage.cs" />
     <Compile Include="RDM_Website.cs" />
     <Compile Include="SeleniumDriverConfig.cs" />
-    <Compile Include="utils\BaseStepsClass.cs" />
     <Compile Include="utils\Log4NetHelper.cs" />
     <Compile Include="utils\Utils.cs" />
     <Compile Include="utils\DataProduct.cs" />
