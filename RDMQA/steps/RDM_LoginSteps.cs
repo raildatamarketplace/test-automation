@@ -54,6 +54,7 @@ namespace RDMQA
         public void WhenIClickTheLoginButton()
         {
             RDM_Website.RDM_LoginPage.ClickLogin();
+            RDM_Website.RDM_Homepage.ClickAcceptCookies();
         }
 
         [When(@"I wait for (.*) seconds")]

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using log4net;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
@@ -26,9 +27,12 @@ namespace RDMQA
             this.wait = new WebDriverWait(seleniumDriver, TimeSpan.FromSeconds(10));
         }
 
-        public void VisitLoginPage() => _seleniumDriver.Navigate().GoToUrl("https://rdmtcs:UvQ%o+oGSm#6C#?V@" + _loginPageURL);
-        public void InputUsername(string username) => _usernameField.SendKeys(username);
-        public void InputPassword(string password) => _passwordField.SendKeys(password);
+        //public void VisitLoginPage() => _seleniumDriver.Navigate().GoToUrl("https://rdmtcs:UvQ%o+oGSm#6C#?V@" + _loginPageURL);
+        public void InputUsername(string username)
+        {
+            _usernameField.SendKeys(username);
+        }
+            public void InputPassword(string password) => _passwordField.SendKeys(password);
         public void ClickLogin() => _loginButton.Click();
 
     }

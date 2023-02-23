@@ -15,22 +15,6 @@ namespace RDMQA
         public static readonly string DataProductURL = ConfigurationManager.AppSettings["dataproduct_url"];
         public static readonly string PublishAProductURL = ConfigurationManager.AppSettings["publishaproduct_url"];
         public static readonly string ProductApprovalURL = ConfigurationManager.AppSettings["dataapproval_url"];
-
-        public static void UpdateValue(string key, string value)
-        {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            var entry = config.AppSettings.Settings[key];
-            if(entry == null)
-            {
-                config.AppSettings.Settings.Add(key, value);
-            } else
-            {
-                config.AppSettings.Settings[key].Value = value;
-            }
-
-            config.Save(ConfigurationSaveMode.Modified);
-
-        }
+        public static readonly string DashboardHomepageURL = ConfigurationManager.AppSettings["dashboardHomepage_url"];
     }
 }

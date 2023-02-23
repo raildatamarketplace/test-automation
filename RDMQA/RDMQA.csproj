@@ -138,6 +138,7 @@
     <Compile Include="steps\RDM_DataProductApprovalJourneySteps.cs" />
     <Compile Include="steps\RDM_DataProductJourneySteps.cs" />
     <Compile Include="steps\RDM_DataProductApprovalSteps.cs" />
+    <Compile Include="steps\RDM_HomepageSteps.cs" />
     <Compile Include="steps\RDM_LoginJourneySteps.cs" />
     <Compile Include="pages\RDM_DataProductApprovalPage.cs" />
     <Compile Include="pages\RDM_MyDataProductPage.cs" />
@@ -159,6 +160,7 @@
     <None Include="App.config" />
     <None Include="features\DataProduct.feature" />
     <None Include="features\DataProductJourney.feature" />
+    <None Include="features\HomepageUI.feature" />
     <None Include="features\Login.feature" />
     <None Include="packages.config" />
   </ItemGroup>

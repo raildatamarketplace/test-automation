@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using log4net;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -22,44 +23,44 @@ namespace RDMQA
 
         //Finding web elements
         private IWebElement _enterProductDetaisLink => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Enter product details']")));
-        private IWebElement _productName => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("name")));
-        private IWebElement _productDescription => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("description")));
+        private IWebElement _productName => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Name']")));
+        private IWebElement _productDescription => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//textarea[@placeholder='Description']")));
         private IWebElement _nextButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Next Step']")));
         private IWebElement _datasourceSearchBar => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Search data source']")));
-        private IReadOnlyList<IWebElement> _dataSourceRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui radio checkbox']")));
+        private IReadOnlyList<IWebElement> _dataSourceRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class='mantine-14ce0tc mantine-Radio-radio']")));
         private IWebElement _tagsSearchBar => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Search tags']")));
         private IWebElement _themesSearchBar => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Search themes']")));
-        private IReadOnlyList<IWebElement> _tagsMainButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//i[@class='plus icon']")));
-        private IReadOnlyList<IWebElement> _subtagsRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui checkbox mr-5px']")));
-        private IReadOnlyList<IWebElement> _themesRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui checkbox my-5px mr-5px']")));
-        private IWebElement _dataProductCanDoTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("dataProductCanDo")));
-        private IWebElement _dataProductCannotDoTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("dataProductCannotDo")));
-        private IReadOnlyList<IWebElement> _publishButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui radio checkbox']")));
+        private IReadOnlyList<IWebElement> _tagsMainButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='mantine-pildck mantine-Accordion-label']")));
+        private IReadOnlyList<IWebElement> _subtagsRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class='mantine-19pad6p mantine-Checkbox-input']")));
+        private IReadOnlyList<IWebElement> _themesRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class='mantine-19pad6p mantine-Checkbox-input']")));
+        private IWebElement _dataProductCanDoTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//textarea[@placeholder='What the data product can do']")));
+        private IWebElement _dataProductCannotDoTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//textarea[@placeholder=\"What the data product can't do\"]")));
+        private IReadOnlyList<IWebElement> _publishButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class='mantine-1p7u50i mantine-Radio-radio']")));
         private IWebElement _publishImmediatelyRadioButton => _publishButtons[0];
         private IWebElement _publishScheduleRadioButton => _publishButtons[1];
-        private IWebElement _retirementPolicyTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.Name("retirementPolicy")));
-        private IReadOnlyList<IWebElement> _serviceLevelAgreementRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui radio checkbox']")));
+        private IWebElement _retirementPolicyTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//textarea[@placeholder='Retirement policy (optional)']")));
+        private IReadOnlyList<IWebElement> _serviceLevelAgreementRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class='mantine-1p7u50i mantine-Radio-radio']")));
         private IWebElement _SLAYesRadioButton => _serviceLevelAgreementRadioButtons[0];
         private IWebElement _SLANoRadioButton => _serviceLevelAgreementRadioButtons[1];
-        private IReadOnlyList<IWebElement> _SLAMetrics => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='ui checkbox py-5px']")));
-        private IWebElement _SLAServiceUptimeRadioButton => _SLAMetrics[0];
+        private IReadOnlyList<IWebElement> _SLAMetrics => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class='mantine-1uvhq74 mantine-Checkbox-input']")));
+        private IWebElement _SLAServiceUptimeRadioButton => _SLAMetrics[1];
         private IWebElement _SLAServiceUptimeTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Enter as a percentage']")));
         private IWebElement _SLAResolutionTimeRadioButton => _SLAMetrics[9];
         private IWebElement _SLAResolutionTimeTextBox => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@placeholder='Enter a duration in hours']")))[1];
-        private IWebElement _SLAResponseTimeOutsideRadioButton => _SLAMetrics[5];
+        private IWebElement _SLAResponseTimeOutsideRadioButton => _SLAMetrics[8];
         private IWebElement _SLAResponseTimeOutsideTextBox => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Enter a duration in hours']")));
-        private IReadOnlyList<IWebElement> _whoCanUseTheDataRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class ='ui radio checkbox']")));
+        private IReadOnlyList<IWebElement> _whoCanUseTheDataRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class ='mantine-1p7u50i mantine-Radio-radio']")));
         private IWebElement _whoCanUseTheDataAnyoneRadioButton => _whoCanUseTheDataRadioButtons[0];
-        private IReadOnlyList<IWebElement> _whatCanTheDataBeUsedForRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class ='ui radio checkbox']")));
+        private IReadOnlyList<IWebElement> _whatCanTheDataBeUsedForRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class ='mantine-1p7u50i mantine-Radio-radio']")));
         private IWebElement _whatCanTheDataBeUsedForAcademia => _whatCanTheDataBeUsedForRadioButtons[0];
-        private IReadOnlyList<IWebElement> _chargingModelRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class ='ui radio checkbox']")));
+        private IReadOnlyList<IWebElement> _chargingModelRadioButtons => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class ='mantine-1p7u50i mantine-Radio-radio']")));
         private IWebElement _chargingModelFree => _chargingModelRadioButtons[0];
-        private IWebElement _noFairUsageLimitsRadioButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class ='ui radio checkbox']")))[0];
-        private IWebElement _yesRecommendedLicenceRadioButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class ='ui radio checkbox']")))[0];
-        private IReadOnlyList<IWebElement> _licencePageDropDowns => wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@role ='listbox']")));
-        private IWebElement _licenceTermDropDown => _licencePageDropDowns[3];
-        private IWebElement _licenceNoticePeriodDropDown => _licencePageDropDowns[4];
-        private IWebElement _licenceTerritorialPermissionDropDown => _licencePageDropDowns[5];
+        private IWebElement _noFairUsageLimitsRadioButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class ='mantine-1p7u50i mantine-Radio-radio']")))[0];
+        private IWebElement _yesRecommendedLicenceRadioButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//input[@class ='mantine-1p7u50i mantine-Radio-radio']")))[0];
+        private IReadOnlyList<IWebElement> _licencePageDropDowns => wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.XPath("//div[@class='mantine-Input-wrapper mantine-Select-wrapper mantine-jrzo75']")));
+        private IWebElement _licenceTermDropDown => _licencePageDropDowns[0];
+        private IWebElement _licenceNoticePeriodDropDown => _licencePageDropDowns[1];
+        private IWebElement _licenceTerritorialPermissionDropDown => _licencePageDropDowns[2];
         private IWebElement _submitButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Submit']")));
        
         //Constructor
@@ -125,9 +126,9 @@ namespace RDMQA
         public void InputSLAResolutionTime(int input) => _SLAResolutionTimeTextBox.SendKeys(input.ToString());
         public void ClickSLAResponseTimeOutsideRadioButton()
         {
-            utils.MoveToLocation(_SLAResponseTimeOutsideRadioButton);
+            //utils.MoveToLocation(_SLAResponseTimeOutsideRadioButton);
             new Actions(_seleniumDriver).MoveToElement(_SLAResponseTimeOutsideRadioButton).Click().Perform();
-            //_SLAResponseTimeOutsideRadioButton.Click();
+            //_SLAResponseTimeOutsideRadioButton.SendKeys(Keys.Enter);
         }
         public void InputSLAResponseTimeOutside(int input) => _SLAResponseTimeOutsideTextBox.SendKeys(input.ToString());
         public void ClickWhoCanUseTheDataRadioButton() => _whoCanUseTheDataAnyoneRadioButton.Click();
@@ -162,8 +163,9 @@ namespace RDMQA
 
         public void SelectDropDownLicenceTerm(int index)
         {
-            //SelectElement dropDown = new SelectElement(_licenceTermDropDown
+            //SelectElement dropDown = new SelectElement(_licenceTermDropDown);
             //dropDown.SelectByIndex(index);
+            //new Actions(_seleniumDriver).MoveToElement(_licenceTermDropDown).Click().Perform();
             _licenceTermDropDown.Click();
             _seleniumDriver.FindElements(By.XPath("//span[@class ='text']"))[index].Click();
         }

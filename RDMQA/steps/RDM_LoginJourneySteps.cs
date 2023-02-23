@@ -28,6 +28,7 @@ namespace RDMQA
             steps.GivenIHaveEnteredInTheUsernameField("test.LNConsumer");
             steps.GivenIHaveEnteredInThePasswordField("TestPassword123$");
             steps.WhenIClickTheLoginButton();
+            steps.WhenIWaitForSeconds(3);
             steps.ThenIShouldBeTakenToTheDashboardHomepage();
         }
 
@@ -60,6 +61,7 @@ namespace RDMQA
             steps.GivenIHaveEnteredInTheUsernameField("test.RDMadminLiam");
             steps.GivenIHaveEnteredInThePasswordField("TestPassword123$");
             steps.WhenIClickTheLoginButton();
+            steps.WhenIWaitForSeconds(3);
             steps.ThenIShouldBeTakenToTheDashboardHomepage();
         }
 
@@ -70,6 +72,7 @@ namespace RDMQA
             steps.GivenIHaveEnteredInTheUsernameField("test.LNFinanceConsumer");
             steps.GivenIHaveEnteredInThePasswordField("TestPassword123$");
             steps.WhenIClickTheLoginButton();
+            steps.WhenIWaitForSeconds(3);
             steps.ThenIShouldBeTakenToTheDashboardHomepage();
         }
 
@@ -80,6 +83,7 @@ namespace RDMQA
             steps.GivenIHaveEnteredInTheUsernameField("test.FinanceApprover");
             steps.GivenIHaveEnteredInThePasswordField("TestPassword123$");
             steps.WhenIClickTheLoginButton();
+            steps.WhenIWaitForSeconds(5);
             steps.ThenIShouldBeTakenToTheDashboardHomepage();
         }
     }

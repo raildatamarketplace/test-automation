@@ -1,4 +1,5 @@
 ﻿using AutoIt;
+using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools;
 using OpenQA.Selenium.Interactions;
