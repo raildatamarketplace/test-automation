@@ -419,7 +419,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 100
- testRunner.Given("I have logged in as a Publisher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have logged in as a Org Admin", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 101
  testRunner.When("I have published a data product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

@@ -26,7 +26,6 @@ namespace RDMQA.steps
         [When(@"I have navigated to create a Data Product")]
         public void WhenIHaveNavigatedToCreateADataProduct()
         {
-            RDM_Website.RDM_Homepage.ClickAcceptCookies();
             RDM_Website.RDM_Homepage.VisitDataProductsPage();
             RDM_Website.RDM_MyDataProductPage.ClickPublish();
         }
@@ -73,7 +72,7 @@ namespace RDMQA.steps
         public void WhenIHaveSelectedTheTag(string searchValue, int index)
         {
             RDM_Website.RDM_PublishAProductPage.SearchTags(searchValue);
-            RDM_Website.RDM_PublishAProductPage.ClickTagsRadioButton(0, index);
+            RDM_Website.RDM_PublishAProductPage.ClickTagsRadioButton(1, index);
         }
 
         [When(@"I have selected the theme ""(.*)""")]
@@ -81,7 +80,7 @@ namespace RDMQA.steps
         public void WhenIHaveSelectedTheTheme(string searchValue)
         {
             RDM_Website.RDM_PublishAProductPage.SearchThemes(searchValue);
-            RDM_Website.RDM_PublishAProductPage.ClickThemesRadioButton(0);
+            RDM_Website.RDM_PublishAProductPage.ClickThemesRadioButton(searchValue);
         }
 
         [When(@"I have entered ""(.*)"" in what the data product can do")]

@@ -36,11 +36,9 @@ namespace RDMQA.hooks
         
         [BeforeScenario]
         public void InitWebDriver()
-            {
-            RDM_Website = new RDM_Website<ChromeDriver>();
-            _objectContainer.RegisterInstanceAs<RDM_Website<ChromeDriver>>(RDM_Website);
+        {
             string featureDir = $@"({featureContext.FeatureInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
-            string featureFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, featureDir);
+            string featureFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Log Files", featureDir);
 
             // If directory does not exist, create it
             if (!Directory.Exists(featureFolderPath))
@@ -48,6 +46,8 @@ namespace RDMQA.hooks
                 Directory.CreateDirectory(featureFolderPath);
             }
             log = Log4NetHelper.GetLogger($@"{scenarioContext.ScenarioInfo.Title} - {DateTime.UtcNow.ToString("HH-mm-ss")}", scenarioContext, featureContext);
+            RDM_Website = new RDM_Website<ChromeDriver>(log);
+            _objectContainer.RegisterInstanceAs<RDM_Website<ChromeDriver>>(RDM_Website);
         }
         
         [AfterScenario]
@@ -56,7 +56,7 @@ namespace RDMQA.hooks
             string featureDir = $@"({featureContext.FeatureInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
             string scenarioDir = $@"({scenarioContext.ScenarioInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
             string imageName = Log4NetHelper.GetFileName();
-            string scenarioFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, featureDir, scenarioDir);
+            string scenarioFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Log Files", featureDir, scenarioDir);
             string imagePath = Path.Combine(scenarioFolderPath, imageName);
             
             // If directory does not exist, create it

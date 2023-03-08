@@ -20,7 +20,7 @@ namespace RDMQA
         private static readonly string _layout = "%date{dd MMM yyyy HH:mm:ss} [%level] - %message%newline";
         private static readonly string _appenderName = "FileAppender";
         private static ScenarioContext scenarioContext;
-        private static FeatureContext featureContext;
+        private static FeatureContext featureContext;   
         private static string fileName;
 
         private static PatternLayout GetPatternLayout()
@@ -39,7 +39,7 @@ namespace RDMQA
         {
             string featureDir = $@"({featureContext.FeatureInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
             string scenarioDir = $@"({scenarioContext.ScenarioInfo.Title}) - {DateTime.UtcNow.Date.ToString("dd-MM-yyyy")}";
-            string scenarioFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, featureDir, scenarioDir);
+            string scenarioFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Log Files", featureDir, scenarioDir);
             string filePath = Path.Combine(scenarioFolderPath, fileName);
             var fileAppender = new FileAppender
             {

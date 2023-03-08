@@ -40,8 +40,8 @@ namespace RDMQA
             steps.WhenIHaveClickedTheNextStepButton();
             steps.WhenIHaveSearchedForAndSelectedThisDataSource("API Authentication Test");
             steps.WhenIHaveClickedTheNextStepButton();
-            steps.WhenIHaveSelectedTheTag("Freight", 0);
-            steps.WhenIHaveSelectedTheTheme("Another Theme");
+            steps.WhenIHaveSelectedTheTag("Freight", 1);
+            steps.WhenIHaveSelectedTheTheme("Another theme");
             steps.WhenIHaveClickedTheNextStepButton();
             steps.WhenIHaveEnteredInWhatTheDataProductCanDo("Something the data product can do");
             steps.WhenIHaveEnteredInWhatTheDataProductCantDo("Something the data product can't do");

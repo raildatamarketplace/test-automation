@@ -97,7 +97,7 @@ Scenario: 001_Publisher publish a data product
 #DataProductJourneyFeature should be used instead. As this is the full process.
 @ignore @OrgAdmin
 Scenario: Org Admin publish a data product
-	Given I have logged in as a Publisher
+	Given I have logged in as a Org Admin
 	When I have published a data product
 	Then I should be taken to the submit confirmation page
 

@@ -18,15 +18,19 @@ namespace RDMQA
     {
         private IWebDriver _seleniumDriver;
         private WebDriverWait wait;
-        private string fileName;
-        private string path;
+        private string dataProductFileName;
+        private string dataProductPath;
+        private string usernameFileName;
+        private string usernamePath;
 
         public Utils(IWebDriver _driver)
         {
             _seleniumDriver = _driver;
             this.wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-            fileName = @"..\..\DataProductNumber.txt";
-            path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            dataProductFileName = @"..\..\DataProductNumber.txt";
+            dataProductPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataProductFileName);
+            usernameFileName = @"..\..\UsernameNumber.txt";
+            usernamePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, usernameFileName);
         }
         public void MoveToLocation(IWebElement element)
         {
@@ -36,23 +40,16 @@ namespace RDMQA
             //Thread.Sleep(2000);
         }
 
-        //public void MoveToLocation(By element)
-        //{
-        //    wait.Until(ExpectedConditions.ElementExists(element));
-        //    int deltaY = _seleniumDriver.FindElement(element).Location.Y;
-        //    new Actions(_seleniumDriver).ScrollByAmount(0, deltaY).Perform();
-        //}
-
         public string GetNewDataProductNumber()
         {
-            StreamReader sr = new StreamReader(path);
+            StreamReader sr = new StreamReader(dataProductPath);
             string line = sr.ReadLine();
             sr.Close();
             int current = Convert.ToInt32(line);
             int updated = current + 1;
 
 
-            StreamWriter sw = new StreamWriter(path);
+            StreamWriter sw = new StreamWriter(dataProductPath);
             sw.WriteLine(updated);
             sw.Close();
             return current.ToString();
@@ -60,7 +57,31 @@ namespace RDMQA
 
         public string GetDataProductNumber()
         {
-            StreamReader sr = new StreamReader(path);
+            StreamReader sr = new StreamReader(dataProductPath);
+            string line = sr.ReadLine();
+            sr.Close();
+            int current = Convert.ToInt32(line) - 1;
+            return current.ToString();
+        }
+
+        public string GetNewUsernameNumber()
+        {
+            StreamReader sr = new StreamReader(usernamePath);
+            string line = sr.ReadLine();
+            sr.Close();
+            int current = Convert.ToInt32(line);
+            int updated = current + 1;
+
+
+            StreamWriter sw = new StreamWriter(usernamePath);
+            sw.WriteLine(updated);
+            sw.Close();
+            return current.ToString();
+        }
+
+        public string GetUsernameNumber()
+        {
+            StreamReader sr = new StreamReader(usernamePath);
             string line = sr.ReadLine();
             sr.Close();
             int current = Convert.ToInt32(line) - 1;

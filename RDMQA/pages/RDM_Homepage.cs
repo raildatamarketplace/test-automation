@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TechTalk.SpecFlow;
 
 namespace RDMQA
 {
@@ -19,15 +20,14 @@ namespace RDMQA
     {
         private IWebDriver _seleniumDriver;
         private WebDriverWait wait;
-        //Sets homepage URL
         private string _homepageURL = AppConfigReader.HomepageURL;
         private string _dashboardHomepageURL = AppConfigReader.DashboardHomepageURL;
+        private ILog log;
 
         //Finding web elements
         private IWebElement _loginLink => wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Login")));
         private IWebElement _navigationHomeLink => wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Home")));
         private IWebElement _navigationDataProductCatalogue => wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Data product catalogue")));
-
         private IReadOnlyList<IWebElement> _manageDropdownLinkElements => _seleniumDriver.FindElements(By.XPath("//div[@class='mantine-1eawhj0 mantine-Menu-itemLabel']"));
         private IReadOnlyList<IWebElement> _manageDropdownLink => _seleniumDriver.FindElements(By.XPath("//div[.='Manage']"));
         private IWebElement _overviewLink => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[.='Overview']")));
@@ -49,39 +49,39 @@ namespace RDMQA
         private IWebElement _accessButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//span[.='Access Rail Data Marketplace']")));
         private IWebElement _cookieBannerButton => wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("button[class='ui small button customBtn1Primary']")));
         private IWebElement _cookieBannerButton2 => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//span[.='Accept additional cookies']")));
-        private IWebElement _accountDropdown => wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div[class='ui item dropdown'")));
+        private IWebElement _accountDropdown => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[@id='mantine-r3-target']")));
         private IWebElement _signoutButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[.='Sign out']")));
+        private IWebElement _organisationProfileButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='mantine-1eawhj0 mantine-Menu-itemLabel']")))[0];
         //Constructor
-        public RDM_Homepage(IWebDriver seleniumDriver)
+        public RDM_Homepage(IWebDriver seleniumDriver, ILog log)
         {
             this._seleniumDriver = seleniumDriver;
             this.wait = new WebDriverWait(seleniumDriver, TimeSpan.FromSeconds(10));
+            this.log = log;
         }
 
         //Functions
 
         public void VisitHomePage()
         {
+            log.Info("Navigated to Homepage: " + _homepageURL); 
             _seleniumDriver.Navigate().GoToUrl(_homepageURL);
-
-            //Below uses AutoItX to interact with the windows login form
-            //AutoItX.WinWaitActive("https://test.raildata.org.uk - Google Chrome");
-            //AutoItX.Send("rdmtcs");
-            //AutoItX.Send("{TAB}");
-            //AutoItX.Send("UvQ%o+oGSm#6C#?V", 1);
-            //AutoItX.Send("{ENTER}");
         }
 
         public void VisitDashboardHomepage()
         {
+            log.Info("Navigated to Dashboard: " + _dashboardHomepageURL);
             _seleniumDriver.Navigate().GoToUrl(_dashboardHomepageURL);
         }
 
-        public void VisitLoginPage() => _loginLink.Click();
-
+        public void VisitLoginPage()
+        {
+            log.Info("Navigating to login page");
+            _loginLink.Click();
+        }
         public void VisitDataProductsPage()
         {
-            _manageDropdownLink[1].Click();
+            _manageDropdownLink[0].Click();
             _myProductsLink.Click();
         }
 
@@ -91,17 +91,33 @@ namespace RDMQA
             _productApprovalsLink.Click();
         }
 
-        public void ClickAccess() => _accessButton.Click();
+        public void ClickAccess()
+        {
+            log.Info("Navigating to the login page");
+            _accessButton.Click();
+        }
 
         public void Logout()
         {
+            log.Info("Logged out");
             _accountDropdown.Click();
             _signoutButton.Click();
         }
 
+        public void VisitOrganisationProfilePage()
+        {
+            log.Info("Going to Org Profile");
+            _accountDropdown.Click();
+            _organisationProfileButton.Click();
+        }
+
         public string GetPageTitle() => _seleniumDriver.Title;
 
-        public void ClickAcceptCookies() => _cookieBannerButton2.Click();
+        public void ClickAcceptCookies() 
+        {
+            log.Info("Accepting cookie banner");
+            _cookieBannerButton2.Click();
+        }
 
         public void DeleteCookies() => _seleniumDriver.Manage().Cookies.DeleteAllCookies();
 
@@ -117,31 +133,9 @@ namespace RDMQA
             }
         }
 
-        public bool[] CheckManageDropdown()
-        {
-            if (_manageDropdownLink.Count <= 0)
-            {
-                return new bool[1] { true };
-            }
-            List<string> expected = new List<string> { "Overview", "My sales", "My products", "My data sources", "Details", 
-                "Manage organisations", "Product approvals", "Product statistics", "Transactions", 
-                "Tags", "Themes", "Alert users", "Reports" };
-            bool[] results = new bool[_manageDropdownLinkElements.Count];
-            for (int i = 0; i<_manageDropdownLinkElements.Count; i++)
-            {
-                if (_manageDropdownLinkElements[i].Text == expected[i])
-                {
-                    results[i] = true;
-                } else
-                {
-                    results[i] = false;
-                }
-            }
-            return results;
-        }
-
         public List<string> CheckNavigationUI()
         {
+            log.Info("Checking Homepage/Dashboard UI");
             //Checks to ensure navigation UI and Manage dropdown are all as expected
             //The only thing that changes per user is the manage dropdown
             //and that is covered in CheckManageDropdownMethod
@@ -158,15 +152,15 @@ namespace RDMQA
                 actual.Add(_navigationHomeLink.Text);
                 actual.Add(_navigationDataProductCatalogue.Text);
                 actual.Add(_manageDropdownLink[0].Text);
+                log.Info("Checking Manage Dropdown..");
                 _manageDropdownLink[0].Click();
                 for (int i = 0; i < _manageDropdownLinkElements.Count; i++)
                 {
                     actual.Add(_manageDropdownLinkElements[i].Text);
                 }
-                
-                actual.Add(_subscriptionsLink.Text);
-                actual.Add(_organisationsLink.Text);
-                actual.Add(_helpAndSupportLink.Text);
+               actual.Add(_subscriptionsLink.Text);
+               actual.Add(_organisationsLink.Text);
+               actual.Add(_helpAndSupportLink.Text);
             }
             return actual;
         }

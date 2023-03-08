@@ -135,9 +135,13 @@
     <Compile Include="AppConfigReader.cs" />
     <Compile Include="features\Login.feature.cs" />
     <Compile Include="hooks\RDM_Hooks.cs" />
+    <Compile Include="pages\RDM_RegistrationPage.cs" />
+    <Compile Include="pages\RDM_OrganisationProfilePage.cs" />
     <Compile Include="steps\RDM_DataProductApprovalJourneySteps.cs" />
     <Compile Include="steps\RDM_DataProductJourneySteps.cs" />
     <Compile Include="steps\RDM_DataProductApprovalSteps.cs" />
+    <Compile Include="steps\RDM_RegistrationSteps.cs" />
+    <Compile Include="steps\RDM_OrganisationProfileSteps.cs" />
     <Compile Include="steps\RDM_HomepageSteps.cs" />
     <Compile Include="steps\RDM_LoginJourneySteps.cs" />
     <Compile Include="pages\RDM_DataProductApprovalPage.cs" />
@@ -159,12 +163,18 @@
     <None Include="App.config" />
     <None Include="features\DataProduct.feature" />
     <None Include="features\DataProductJourney.feature" />
+    <None Include="features\Organisations.feature" />
     <None Include="features\HomepageUI.feature" />
     <None Include="features\Login.feature" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DataProductNumber.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UsernameNumber.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
