@@ -18,6 +18,7 @@ namespace RDMQA
         public RDM_PublishAProductPage RDM_PublishAProductPage { get; set; }
         public RDM_DataProductApprovalPage RDM_DataProductApprovalPage { get; set; }
         public RDM_OrganisationProfilePage RDM_OrganisationProfilePage { get; set; }
+        public RDM_RegistrationPage RDM_RegistrationPage { get; set; }
 
         public RDM_Website(ILog log, int pageLoadInSecs = 30, int impicitWaitInSecs = 30)
         {
@@ -31,6 +32,7 @@ namespace RDMQA
             RDM_PublishAProductPage = new RDM_PublishAProductPage(SeleniumDriver);
             RDM_DataProductApprovalPage = new RDM_DataProductApprovalPage(SeleniumDriver);
             RDM_OrganisationProfilePage = new RDM_OrganisationProfilePage(SeleniumDriver, log);
+            RDM_RegistrationPage = new RDM_RegistrationPage(SeleniumDriver, log);
         }
     }
 }
