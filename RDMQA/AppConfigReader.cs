@@ -16,5 +16,6 @@ namespace RDMQA
         public static readonly string PublishAProductURL = ConfigurationManager.AppSettings["publishaproduct_url"];
         public static readonly string ProductApprovalURL = ConfigurationManager.AppSettings["dataapproval_url"];
         public static readonly string DashboardHomepageURL = ConfigurationManager.AppSettings["dashboardHomepage_url"];
+        public static readonly string RegistrationURL = ConfigurationManager.AppSettings["registration_url"];
     }
 }

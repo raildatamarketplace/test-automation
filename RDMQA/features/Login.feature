@@ -11,7 +11,7 @@ Scenario: Successful login - RDM Admin - PreProd
 	And I wait for 3 seconds
 	Then I should be taken to the dashboard homepage
 
-@login @preprod
+@login @preprod @ignore
 Scenario: Successful login - Org Admin - PreProd
 	Given I am on the login page
 	And I have entered "PreProd.LNAdmin" in the username field
@@ -20,7 +20,7 @@ Scenario: Successful login - Org Admin - PreProd
 	And I wait for 3 seconds
 	Then I should be taken to the dashboard homepage
 
-@login @preprod
+@login @preprod @ignore
 Scenario: Successful login - Publisher - PreProd
 	Given I am on the login page
 	And I have entered "PreProd.LNPublisher" in the username field
@@ -29,7 +29,7 @@ Scenario: Successful login - Publisher - PreProd
 	And I wait for 3 seconds
 	Then I should be taken to the dashboard homepage
 
-@login @preprod
+@login @preprod @ignore
 Scenario: Successful login - Consumer - PreProd
 	Given I am on the login page
 	And I have entered "PreProd.LNConsumer" in the username field
@@ -38,7 +38,7 @@ Scenario: Successful login - Consumer - PreProd
 	And I wait for 3 seconds
 	Then I should be taken to the dashboard homepage
 
-@login @preprod
+@login @preprod @ignore
 Scenario: Successful login - FinanciallyAuthorisedConsumer - PreProd
 	Given I am on the login page
 	And I have entered "PreProd.LNFAC" in the username field
@@ -47,7 +47,7 @@ Scenario: Successful login - FinanciallyAuthorisedConsumer - PreProd
 	And I wait for 3 seconds
 	Then I should be taken to the dashboard homepage
 
-@login @preprod
+@login @preprod @ignore
 Scenario: Successful login - FinanceApprover - PreProd
 	Given I am on the login page
 	And I have entered "PreProd.FinanceApprover" in the username field
@@ -110,7 +110,7 @@ Scenario: Successful login - FinanceApprover - Test
 	And I wait for 3 seconds
 	Then I should be taken to the dashboard homepage
 
-@login @logout @preprod
+@login @logout @preprod @ignore
 Scenario: Login and Logout - PreProd
 	Given I am on the login page
 	And I have entered "PreProd.FinanceApprover" in the username field

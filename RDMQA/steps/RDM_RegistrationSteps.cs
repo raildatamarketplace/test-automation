@@ -42,17 +42,18 @@ namespace RDMQA.steps
 
             RDM_Website.RDM_RegistrationPage.ClickAgreeToPlatformAgreement();
             RDM_Website.RDM_RegistrationPage.EnterTypeOfOrganisation(1);
-            RDM_Website.RDM_RegistrationPage.EnterAccountName("SeleniumAutomationOrg");
+            RDM_Website.RDM_RegistrationPage.EnterAccountName("SeleniumAutomationOrg" + utils.GetNewUsernameNumber());
             RDM_Website.RDM_RegistrationPage.EnterAddressLine1("Address Line 1");
             RDM_Website.RDM_RegistrationPage.EnterTown("AutomationTown");
             RDM_Website.RDM_RegistrationPage.EnterCounty("AutomationCounty");
             RDM_Website.RDM_RegistrationPage.EnterPostcode("Postcode");
-            RDM_Website.RDM_RegistrationPage.EnterOrgEmailAddress("RDMTest@raildeliverygroup.com");
-            RDM_Website.RDM_RegistrationPage.EnterUsername("test.AutomationAdmin");
+            RDM_Website.RDM_RegistrationPage.EnterOrgEmailAddress("RDMTest" + utils.GetUsernameNumber() + "@raildeliverygroup.com");
+            RDM_Website.RDM_RegistrationPage.EnterUsername("test.AutomationAdmin" + utils.GetUsernameNumber());
             RDM_Website.RDM_RegistrationPage.EnterFirstName("Automation");
             RDM_Website.RDM_RegistrationPage.EnterLastName("User");
             RDM_Website.RDM_RegistrationPage.EnterUserPhoneNumber(0);
-            RDM_Website.RDM_RegistrationPage.EnterUserEmailAddress("RDMTest@raildeliverygroup.com");
+            RDM_Website.RDM_RegistrationPage.EnterUserEmailAddress("RDMTest" + utils.GetUsernameNumber() + "@raildeliverygroup.com");
+            RDM_Website.RDM_RegistrationPage.ClickRegisterButton();
         }
 
         [Then("The organisation should be registered")]
@@ -60,7 +61,8 @@ namespace RDMQA.steps
         public void ThenTheOrganisationShouldBeRegistered()
         {
             //Need to integrate Gov.Notift at some point to check emails
-            Assert.Equals("https://test.raildata.org.uk/registerPartner/submit", RDM_Website.SeleniumDriver.Url);
+            Thread.Sleep(5000);
+            Assert.AreEqual("https://test.raildata.org.uk/registerPartner/submit", RDM_Website.SeleniumDriver.Url);
         }
     }
 }

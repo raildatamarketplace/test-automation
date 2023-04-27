@@ -25,7 +25,7 @@ namespace RDMQA
         private ILog log;
 
         //Finding web elements
-        private IWebElement _loginLink => wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Login")));
+        private IWebElement _loginLink => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Sign in']")));
         private IWebElement _navigationHomeLink => wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Home")));
         private IWebElement _navigationDataProductCatalogue => wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Data product catalogue")));
         private IReadOnlyList<IWebElement> _manageDropdownLinkElements => _seleniumDriver.FindElements(By.XPath("//div[@class='mantine-1eawhj0 mantine-Menu-itemLabel']"));
@@ -49,7 +49,7 @@ namespace RDMQA
         private IWebElement _accessButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//span[.='Access Rail Data Marketplace']")));
         private IWebElement _cookieBannerButton => wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("button[class='ui small button customBtn1Primary']")));
         private IWebElement _cookieBannerButton2 => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//span[.='Accept additional cookies']")));
-        private IWebElement _accountDropdown => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[@id='mantine-r3-target']")));
+        private IWebElement _accountDropdown => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[@id='mantine-r7-target']")));
         private IWebElement _signoutButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[.='Sign out']")));
         private IWebElement _organisationProfileButton => wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//div[@class='mantine-1eawhj0 mantine-Menu-itemLabel']")))[0];
         //Constructor

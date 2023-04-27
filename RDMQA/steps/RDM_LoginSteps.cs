@@ -33,9 +33,7 @@ namespace RDMQA
         public void GivenIAmOnTheLoginPage()
         {
            RDM_Website.RDM_Homepage.VisitHomePage();
-           RDM_Website.RDM_Homepage.ClickAccess(); 
-           //Updated for Private Beta
-           //RDM_Website.RDM_Homepage.VisitLoginPage();
+           RDM_Website.RDM_Homepage.VisitLoginPage();
         }
 
         [Given(@"I have entered ""(.*)"" in the username field")]

@@ -15,11 +15,12 @@ namespace RDMQA
     {
         private IWebDriver _seleniumDriver;
         private WebDriverWait wait;
+        private Utils utils;
         //Currently not working due to authentication issue?
         private string _registrationURL = AppConfigReader.RegistrationURL;
         private ILog log;
 
-        private IWebElement _platformAgreement => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@class='mantine-14ce0tc mantine-Radio-radio']")));
+        private IWebElement _platformAgreement => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@name='isTermOfServiceChecked']")));
         private IWebElement _typeOfOrganisation => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='mantine-Input-wrapper mantine-Select-wrapper mantine-jrzo75']")));
         private IWebElement _accountName => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Account name']")));
         private IWebElement _profileDescription => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Profile description']")));
@@ -29,12 +30,13 @@ namespace RDMQA
         private IWebElement _county => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='County or region']")));
         private IWebElement _postcode => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Postcode or ZIP code']")));
         private IWebElement _countrydropdown => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@class='mantine-Input-input mantine-Select-input mantine-8852l6']")));
-        private IWebElement _orgEmailAddress => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='']")));
+        private IWebElement _orgEmailAddress => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Organisation email address']")));
         private IWebElement _username => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Username']")));
         private IWebElement _userFirstName => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='First name']")));
         private IWebElement _userLastName => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Last name']")));
         private IWebElement _userPhoneNumber => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Phone number']")));
         private IWebElement _userEmailAddress => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Email address']")));
+        private IWebElement _registerButton => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.='Register']")));
 
 
         public RDM_RegistrationPage(IWebDriver seleniumDriver, ILog log)
@@ -42,6 +44,7 @@ namespace RDMQA
             this._seleniumDriver = seleniumDriver;
             this.wait = new WebDriverWait(seleniumDriver, TimeSpan.FromSeconds(10));
             this.log = log;
+            this.utils = new Utils(seleniumDriver);
         }
 
         public void VisitRegistrationPage()
@@ -53,6 +56,7 @@ namespace RDMQA
         public void ClickAgreeToPlatformAgreement()
         {
             log.Info("Clicking agree to platform agreement");
+            utils.MoveToLocation(_platformAgreement);
             _platformAgreement.Click();
         }
         public void EnterTypeOfOrganisation(int index)
@@ -60,8 +64,9 @@ namespace RDMQA
             log.Info("Entering type of organisation");
             _typeOfOrganisation.Click();
             //use index to input number of arrows down
-            _typeOfOrganisation.SendKeys(Keys.ArrowDown);
-            _typeOfOrganisation.SendKeys(Keys.Enter);
+            _seleniumDriver.FindElement(By.XPath("//div[@id='mantine-r9-" + (index-1) + "']")).Click();
+           // _typeOfOrganisation.SendKeys(Keys.ArrowDown);
+           // _typeOfOrganisation.SendKeys(Keys.Enter);
         }
 
         public void EnterAccountName(string accountName)
@@ -152,6 +157,12 @@ namespace RDMQA
             _userEmailAddress.SendKeys(userEmail);
         }
 
+        public void ClickRegisterButton()
+        {
+            log.Info("Clicking register button");
+            utils.MoveToLocation(_registerButton);
+            _registerButton.Click();
+        }
 
 
     }

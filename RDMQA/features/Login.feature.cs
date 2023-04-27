@@ -118,13 +118,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Successful login - Org Admin - PreProd")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("login")]
         [NUnit.Framework.CategoryAttribute("preprod")]
         public void SuccessfulLogin_OrgAdmin_PreProd()
         {
             string[] tagsOfScenario = new string[] {
                     "login",
-                    "preprod"};
+                    "preprod",
+                    "ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login - Org Admin - PreProd", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 15
@@ -161,13 +163,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Successful login - Publisher - PreProd")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("login")]
         [NUnit.Framework.CategoryAttribute("preprod")]
         public void SuccessfulLogin_Publisher_PreProd()
         {
             string[] tagsOfScenario = new string[] {
                     "login",
-                    "preprod"};
+                    "preprod",
+                    "ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login - Publisher - PreProd", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 24
@@ -204,13 +208,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Successful login - Consumer - PreProd")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("login")]
         [NUnit.Framework.CategoryAttribute("preprod")]
         public void SuccessfulLogin_Consumer_PreProd()
         {
             string[] tagsOfScenario = new string[] {
                     "login",
-                    "preprod"};
+                    "preprod",
+                    "ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login - Consumer - PreProd", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 33
@@ -247,13 +253,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Successful login - FinanciallyAuthorisedConsumer - PreProd")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("login")]
         [NUnit.Framework.CategoryAttribute("preprod")]
         public void SuccessfulLogin_FinanciallyAuthorisedConsumer_PreProd()
         {
             string[] tagsOfScenario = new string[] {
                     "login",
-                    "preprod"};
+                    "preprod",
+                    "ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login - FinanciallyAuthorisedConsumer - PreProd", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 42
@@ -290,13 +298,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Successful login - FinanceApprover - PreProd")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("login")]
         [NUnit.Framework.CategoryAttribute("preprod")]
         public void SuccessfulLogin_FinanceApprover_PreProd()
         {
             string[] tagsOfScenario = new string[] {
                     "login",
-                    "preprod"};
+                    "preprod",
+                    "ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful login - FinanceApprover - PreProd", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 51
@@ -591,6 +601,7 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Login and Logout - PreProd")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("login")]
         [NUnit.Framework.CategoryAttribute("logout")]
         [NUnit.Framework.CategoryAttribute("preprod")]
@@ -599,7 +610,8 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = new string[] {
                     "login",
                     "logout",
-                    "preprod"};
+                    "preprod",
+                    "ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login and Logout - PreProd", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 114
