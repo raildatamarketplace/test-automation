@@ -47,12 +47,12 @@ namespace RDMQA.steps
             RDM_Website.RDM_RegistrationPage.EnterTown("AutomationTown");
             RDM_Website.RDM_RegistrationPage.EnterCounty("AutomationCounty");
             RDM_Website.RDM_RegistrationPage.EnterPostcode("Postcode");
-            RDM_Website.RDM_RegistrationPage.EnterOrgEmailAddress("RDMTest" + utils.GetUsernameNumber() + "@raildeliverygroup.com");
+            RDM_Website.RDM_RegistrationPage.EnterOrgEmailAddress("RDMTest+" + utils.GetUsernameNumber() + "@raildeliverygroup.com");
             RDM_Website.RDM_RegistrationPage.EnterUsername("test.AutomationAdmin" + utils.GetUsernameNumber());
             RDM_Website.RDM_RegistrationPage.EnterFirstName("Automation");
             RDM_Website.RDM_RegistrationPage.EnterLastName("User");
             RDM_Website.RDM_RegistrationPage.EnterUserPhoneNumber(0);
-            RDM_Website.RDM_RegistrationPage.EnterUserEmailAddress("RDMTest" + utils.GetUsernameNumber() + "@raildeliverygroup.com");
+            RDM_Website.RDM_RegistrationPage.EnterUserEmailAddress("RDMTest+" + utils.GetUsernameNumber() + "@raildeliverygroup.com");
             RDM_Website.RDM_RegistrationPage.ClickRegisterButton();
         }
 
@@ -62,7 +62,7 @@ namespace RDMQA.steps
         {
             //Need to integrate Gov.Notift at some point to check emails
             Thread.Sleep(5000);
-            Assert.AreEqual("https://test.raildata.org.uk/registerPartner/submit", RDM_Website.SeleniumDriver.Url);
+            Assert.AreEqual("https://preprod.raildata.org.uk/registerPartner/submit", RDM_Website.SeleniumDriver.Url);
         }
     }
 }

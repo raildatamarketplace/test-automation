@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;   
 using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Chrome;
@@ -11,6 +12,7 @@ using OpenQA.Selenium.Support.UI;
 using System.IO;
 using SeleniumExtras.WaitHelpers;
 using System.Drawing.Drawing2D;
+using System.Xml.Linq;
 
 namespace RDMQA
 {
@@ -22,6 +24,8 @@ namespace RDMQA
         private string dataProductPath;
         private string usernameFileName;
         private string usernamePath;
+        private string usersFileName;
+        private string usersPath;
 
         public Utils(IWebDriver _driver)
         {
@@ -31,6 +35,8 @@ namespace RDMQA
             dataProductPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dataProductFileName);
             usernameFileName = @"..\..\UsernameNumber.txt";
             usernamePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, usernameFileName);
+            usersFileName = @"..\..\Users.xml";
+            usersPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, usersFileName);
         }
         public void MoveToLocation(IWebElement element)
         {
@@ -86,6 +92,35 @@ namespace RDMQA
             sr.Close();
             int current = Convert.ToInt32(line) - 1;
             return current.ToString();
+        }
+
+        public string GetUsername(UserType userType)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(usersPath);
+            XmlNode node = doc.SelectSingleNode("/Users/" + userType.ToString() + "/Username");
+            string text = node.InnerText;
+            return text;
+        }
+
+        public string GetPassword(UserType userType)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(usersPath);
+            XmlNode node = doc.SelectSingleNode("/Users/" + userType.ToString() + "/Password");
+            string text = node.InnerText;
+            return text;
+        }
+
+        public enum UserType
+        {
+            RDMAdmin,
+            Admin,
+            Publisher,
+            Consumer,
+            FAConsumer,
+            FinanceApprover,
+            ContentManager
         }
 
     }

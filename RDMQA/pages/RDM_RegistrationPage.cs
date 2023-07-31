@@ -22,7 +22,7 @@ namespace RDMQA
 
         private IWebElement _platformAgreement => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@name='isTermOfServiceChecked']")));
         private IWebElement _typeOfOrganisation => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='mantine-Input-wrapper mantine-Select-wrapper mantine-jrzo75']")));
-        private IWebElement _accountName => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Account name']")));
+        private IWebElement _accountName => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Account display name']")));
         private IWebElement _profileDescription => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Profile description']")));
         private IWebElement _website => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Website']")));
         private IWebElement _addressLine1 => wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@placeholder='Address line 1']")));

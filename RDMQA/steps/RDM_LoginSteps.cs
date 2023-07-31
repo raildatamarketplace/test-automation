@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.UI;
 using TechTalk.SpecFlow;
 
 namespace RDMQA
@@ -17,10 +18,12 @@ namespace RDMQA
     public class RDM_LoginSteps
     {
         private RDM_Website<ChromeDriver> RDM_Website;
+        private Utils utils;
 
-       public RDM_LoginSteps(RDM_Website<ChromeDriver> rdm_website) 
+        public RDM_LoginSteps(RDM_Website<ChromeDriver> rdm_website) 
        {
             RDM_Website = rdm_website;
+            this.utils = new Utils(RDM_Website.SeleniumDriver);
         }
 
         [Given(@"I am on the homepage")]
@@ -48,6 +51,42 @@ namespace RDMQA
             RDM_Website.RDM_LoginPage.InputPassword(password);
         }
 
+        [Given(@"I have logged in as ""(.*)"" user")]
+        public void GivenIHaveLoggedIn(Utils.UserType userType)
+        {
+            switch(userType)
+            {
+                case Utils.UserType.RDMAdmin:
+                    RDM_Website.RDM_LoginPage.InputUsername(utils.GetUsername(Utils.UserType.RDMAdmin));
+                    RDM_Website.RDM_LoginPage.InputPassword(utils.GetPassword(Utils.UserType.RDMAdmin));
+                    break;
+                case Utils.UserType.Admin:
+                    RDM_Website.RDM_LoginPage.InputUsername(utils.GetUsername(Utils.UserType.Admin));
+                    RDM_Website.RDM_LoginPage.InputPassword(utils.GetPassword(Utils.UserType.Admin));
+                    break;
+                case Utils.UserType.Publisher:
+                    RDM_Website.RDM_LoginPage.InputUsername(utils.GetUsername(Utils.UserType.Publisher));
+                    RDM_Website.RDM_LoginPage.InputPassword(utils.GetPassword(Utils.UserType.Publisher));
+                    break;
+                case Utils.UserType.Consumer:
+                    RDM_Website.RDM_LoginPage.InputUsername(utils.GetUsername(Utils.UserType.Consumer));
+                    RDM_Website.RDM_LoginPage.InputPassword(utils.GetPassword(Utils.UserType.Consumer));
+                    break;
+                case Utils.UserType.FAConsumer:
+                    RDM_Website.RDM_LoginPage.InputUsername(utils.GetUsername(Utils.UserType.FAConsumer));
+                    RDM_Website.RDM_LoginPage.InputPassword(utils.GetPassword(Utils.UserType.FAConsumer));
+                    break;
+                case Utils.UserType.FinanceApprover:
+                    RDM_Website.RDM_LoginPage.InputUsername(utils.GetUsername(Utils.UserType.FinanceApprover));
+                    RDM_Website.RDM_LoginPage.InputPassword(utils.GetPassword(Utils.UserType.FinanceApprover));
+                    break;
+                case Utils.UserType.ContentManager:
+                    RDM_Website.RDM_LoginPage.InputUsername(utils.GetUsername(Utils.UserType.ContentManager));
+                    RDM_Website.RDM_LoginPage.InputPassword(utils.GetPassword(Utils.UserType.ContentManager));
+                    break;
+            }
+        }
+
         [When(@"I click the login button")]
         public void WhenIClickTheLoginButton()
         {
@@ -70,7 +109,7 @@ namespace RDMQA
         [Then(@"I should be taken to the dashboard homepage")]
         public void ThenIShouldBeTakenToTheDashboardHomepage()
         {
-           Assert.AreEqual("https://test.raildata.org.uk/dashboard", RDM_Website.SeleniumDriver.Url, "Test Failed - URL is incorrect");
+           Assert.AreEqual("https://preprod.raildata.org.uk/dashboard", RDM_Website.SeleniumDriver.Url, "Test Failed - URL is incorrect");
            //Assert.IsTrue(RDM_Website.SeleniumDriver.Url.Contains("9"), "Test Failed");
            //if (RDM_Website.SeleniumDriver.Url.Contains("9"))
            //{

@@ -81,11 +81,5 @@ namespace RDMQA.hooks
             RDM_Website.SeleniumDriver.Quit();
             RDM_Website.SeleniumDriver.Dispose();
         }
-
-        //[BeforeFeature]
-        //public void CreateDirectory()
-        //{
-        //
-        //}
     }
 }

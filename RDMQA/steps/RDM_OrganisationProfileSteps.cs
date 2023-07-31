@@ -51,7 +51,7 @@ namespace RDMQA.steps
             //Something to look into in the future. Currently just checking if the add user functionality
             //works and not if the user can create a password etc
 
-            Assert.AreEqual(username, RDM_Website.SeleniumDriver.FindElement(By.XPath("//span[.='"+ username + "']")).Text, "Test Failed - Username can't be found"); ;
+            Assert.AreEqual(username, RDM_Website.SeleniumDriver.FindElement(By.ClassName("mantine-Text-root mantine-43udwt")).Text, "Test Failed - Username can't be found");
         }
     }
 }
